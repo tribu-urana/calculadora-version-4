@@ -1,0 +1,305 @@
+<!-- CALCULADORA MAPA DEL UMBRAL - TRIBU URANA -->
+<!-- Pega TODO este código en el campo Embed > Code de Carrd -->
+
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+#mapaUmbral *{margin:0;padding:0;box-sizing:border-box}
+#mapaUmbral{font-family:'Rajdhani',sans-serif;color:#D8EFEF;max-width:700px;margin:0 auto}
+#mapaUmbral .mu-header{background:linear-gradient(135deg,#1A1A2E 0%,#0D3040 100%);padding:28px 32px;border-bottom:2px solid #3A9FA8}
+#mapaUmbral .mu-header h2{font-size:22px;font-weight:600;color:#fff;letter-spacing:2px;margin-bottom:3px}
+#mapaUmbral .mu-sub{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:#3A9FA8;text-transform:uppercase;margin-bottom:10px}
+#mapaUmbral .mu-tagline{font-size:14px;color:#7ECFCF;font-weight:300;line-height:1.55}
+#mapaUmbral .mu-form{background:#050E12;padding:28px 32px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+#mapaUmbral .mu-field{display:flex;flex-direction:column;gap:7px}
+#mapaUmbral .mu-field label{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;color:#3A9FA8;text-transform:uppercase}
+#mapaUmbral .mu-field input,#mapaUmbral .mu-field select{background:#0D1A20;border:1px solid rgba(58,159,168,0.3);color:#D8EFEF;padding:10px 14px;font-family:'Rajdhani',sans-serif;font-size:16px;outline:none;transition:border-color .2s;width:100%}
+#mapaUmbral .mu-field input:focus,#mapaUmbral .mu-field select:focus{border-color:#3A9FA8}
+#mapaUmbral .mu-field input::placeholder{color:#446666;font-size:14px}
+#mapaUmbral .mu-field select option{background:#0D1A20}
+#mapaUmbral .mu-btn{grid-column:1/-1;background:linear-gradient(90deg,#1A6E7A,#3A9FA8);border:none;color:#fff;padding:14px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:opacity .2s;margin-top:6px;width:100%}
+#mapaUmbral .mu-btn:hover{opacity:.85}
+#mapaUmbral .mu-result{display:none;background:#050E12;border-top:1px solid rgba(58,159,168,.2)}
+#mapaUmbral .mu-result.show{display:block}
+#mapaUmbral .mu-res-header{background:#0D1A2E;padding:18px 32px;border-bottom:1px solid rgba(58,159,168,.2)}
+#mapaUmbral .mu-res-header h3{font-size:17px;font-weight:600;color:#7ECFCF;letter-spacing:1px}
+#mapaUmbral .mu-res-header span{font-family:'Space Mono',monospace;font-size:8px;color:#446666;letter-spacing:2px;display:block;margin-top:4px}
+#mapaUmbral .mu-grid{padding:24px 32px;display:grid;gap:18px}
+#mapaUmbral .mu-card{background:#0D1A20;border:1px solid rgba(58,159,168,.2);border-left:3px solid #3A9FA8;padding:18px 20px}
+#mapaUmbral .mu-card.nodo{border-left-color:#6B6BD4}
+#mapaUmbral .mu-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:9px;gap:10px}
+#mapaUmbral .mu-name{font-family:'Space Mono',monospace;font-size:8.5px;letter-spacing:2.5px;color:#3A9FA8;text-transform:uppercase}
+#mapaUmbral .mu-card.nodo .mu-name{color:#6B6BD4}
+#mapaUmbral .mu-pos{font-size:22px;font-weight:600;color:#fff;letter-spacing:.5px;margin-bottom:5px}
+#mapaUmbral .mu-casa-badge{font-family:'Space Mono',monospace;font-size:11px;color:#7ECFCF;background:rgba(58,159,168,.12);padding:4px 10px;white-space:nowrap;flex-shrink:0}
+#mapaUmbral .mu-desc{font-size:13.5px;color:#8AACAC;line-height:1.65}
+#mapaUmbral .mu-desafio{font-size:14px;color:#D8EFEF;line-height:1.65;margin-top:12px;padding-top:12px;border-top:1px solid rgba(58,159,168,.15)}
+#mapaUmbral .mu-desafio strong{color:#7ECFCF}
+#mapaUmbral .mu-nota{padding:16px 32px;background:#0A1520;border-top:1px solid rgba(58,159,168,.15)}
+#mapaUmbral .mu-nota p{font-family:'Space Mono',monospace;font-size:7.5px;letter-spacing:1.5px;color:#446666;line-height:1.8}
+#mapaUmbral .mu-cta{background:linear-gradient(135deg,#0D2030,#1A1A2E);border:1px solid rgba(58,159,168,.3);padding:24px 32px;text-align:center}
+#mapaUmbral .mu-cta p{font-size:15px;color:#7ECFCF;line-height:1.6;margin-bottom:16px}
+#mapaUmbral .mu-cta a{display:inline-block;background:linear-gradient(90deg,#1A6E7A,#6B6BD4);color:#fff;padding:12px 28px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;text-decoration:none}
+#mapaUmbral .mu-err{display:none;background:#1A0D0D;border:1px solid rgba(200,80,80,.3);color:#FF8888;padding:11px 16px;font-size:14px;grid-column:1/-1}
+@media(max-width:520px){
+  #mapaUmbral .mu-form{grid-template-columns:1fr}
+  #mapaUmbral .mu-header,#mapaUmbral .mu-form,#mapaUmbral .mu-grid,#mapaUmbral .mu-nota,#mapaUmbral .mu-cta,#mapaUmbral .mu-res-header{padding-left:18px;padding-right:18px}
+}
+</style>
+
+<div id="mapaUmbral">
+  <div class="mu-header">
+    <h2>TU MAPA DEL UMBRAL</h2>
+    <div class="mu-sub">Laboratorio de Reinicio Ontológico · Entropía Transformacional</div>
+    <div class="mu-tagline">Descubre en qué áreas de tu vida están operando los grandes tránsitos del cambio de época, y cuál es la dirección evolutiva que tu carta natal te propone para habitarlos conscientemente.</div>
+  </div>
+
+  <div class="mu-form">
+    <div class="mu-field">
+      <label>Día de nacimiento</label>
+      <input type="number" id="muDay" min="1" max="31" placeholder="ej. 15">
+    </div>
+    <div class="mu-field">
+      <label>Mes de nacimiento</label>
+      <select id="muMonth">
+        <option value="">Mes...</option>
+        <option value="1">Enero</option><option value="2">Febrero</option>
+        <option value="3">Marzo</option><option value="4">Abril</option>
+        <option value="5">Mayo</option><option value="6">Junio</option>
+        <option value="7">Julio</option><option value="8">Agosto</option>
+        <option value="9">Septiembre</option><option value="10">Octubre</option>
+        <option value="11">Noviembre</option><option value="12">Diciembre</option>
+      </select>
+    </div>
+    <div class="mu-field">
+      <label>Año de nacimiento</label>
+      <input type="number" id="muYear" min="1940" max="2005" placeholder="ej. 1978">
+    </div>
+    <div class="mu-field">
+      <label>Ascendente (si lo conoces)</label>
+      <select id="muAsc">
+        <option value="">No lo sé / Omitir</option>
+        <option value="Aries">Aries</option><option value="Tauro">Tauro</option>
+        <option value="Géminis">Géminis</option><option value="Cáncer">Cáncer</option>
+        <option value="Leo">Leo</option><option value="Virgo">Virgo</option>
+        <option value="Libra">Libra</option><option value="Escorpio">Escorpio</option>
+        <option value="Sagitario">Sagitario</option><option value="Capricornio">Capricornio</option>
+        <option value="Acuario">Acuario</option><option value="Piscis">Piscis</option>
+      </select>
+    </div>
+    <div class="mu-field">
+      <label>Nodo Norte · signo</label>
+      <select id="muNodo">
+        <option value="">No lo sé / Calcular automáticamente</option>
+        <option value="Aries">Aries</option><option value="Tauro">Tauro</option>
+        <option value="Géminis">Géminis</option><option value="Cáncer">Cáncer</option>
+        <option value="Leo">Leo</option><option value="Virgo">Virgo</option>
+        <option value="Libra">Libra</option><option value="Escorpio">Escorpio</option>
+        <option value="Sagitario">Sagitario</option><option value="Capricornio">Capricornio</option>
+        <option value="Acuario">Acuario</option><option value="Piscis">Piscis</option>
+      </select>
+    </div>
+    <div class="mu-field">
+      <label>Nodo Norte · casa</label>
+      <select id="muNodoCasa">
+        <option value="">No lo sé / Calcular automáticamente</option>
+        <option value="1">Casa 1</option><option value="2">Casa 2</option>
+        <option value="3">Casa 3</option><option value="4">Casa 4</option>
+        <option value="5">Casa 5</option><option value="6">Casa 6</option>
+        <option value="7">Casa 7</option><option value="8">Casa 8</option>
+        <option value="9">Casa 9</option><option value="10">Casa 10</option>
+        <option value="11">Casa 11</option><option value="12">Casa 12</option>
+      </select>
+    </div>
+    <div class="mu-err" id="muErr">Por favor completa día, mes y año de nacimiento correctamente.</div>
+    <button class="mu-btn" onclick="muCalcular()">Calcular mi mapa del umbral →</button>
+  </div>
+
+  <div class="mu-result" id="muResult">
+    <div class="mu-res-header">
+      <h3 id="muResName">Tu mapa del umbral</h3>
+      <span id="muResDate"></span>
+    </div>
+    <div class="mu-grid" id="muGrid"></div>
+    <div class="mu-nota">
+      <p>* Casas calculadas según el ascendente ingresado. Sin ascendente se usa la casa solar aproximada.<br>
+         Para un análisis completo con hora y lugar exactos, usa Astro.com con tus datos de nacimiento.</p>
+    </div>
+    <div class="mu-cta">
+      <p>Este mapa es solo el punto de partida.<br>
+         Entropía Transformacional te guía durante 28 días para habitar conscientemente cada uno de estos tránsitos.</p>
+      <a href="https://www.tribuurana.com">Conoce el programa →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+var SIGNS=["Aries","Tauro","Géminis","Cáncer","Leo","Virgo","Libra","Escorpio","Sagitario","Capricornio","Acuario","Piscis"];
+var AREAS=["","la identidad y el cuerpo","los recursos y valores propios","la comunicación y el aprendizaje","el hogar y las raíces","la creatividad y la expresión","los hábitos y el servicio","los vínculos y las alianzas","la transformación profunda","las creencias y la filosofía","la vocación y el rol público","los colectivos y redes","el inconsciente y la espiritualidad"];
+
+function calcNodo(y,m,d){
+  var T=[
+    [[2026,7,27],[2028,2,5],"Acuario"],[[2025,1,12],[2026,7,26],"Piscis"],
+    [[2023,7,17],[2025,1,11],"Aries"],[[2022,1,18],[2023,7,16],"Tauro"],
+    [[2020,5,5],[2022,1,17],"Géminis"],[[2018,11,6],[2020,5,4],"Cáncer"],
+    [[2017,5,9],[2018,11,5],"Leo"],[[2015,11,12],[2017,5,8],"Virgo"],
+    [[2014,2,18],[2015,11,11],"Libra"],[[2012,8,29],[2014,2,17],"Escorpio"],
+    [[2011,3,3],[2012,8,28],"Sagitario"],[[2009,8,21],[2011,3,2],"Capricornio"],
+    [[2008,2,18],[2009,8,20],"Acuario"],[[2006,6,22],[2007,12,18],"Piscis"],
+    [[2004,12,26],[2006,6,21],"Aries"],[[2003,4,14],[2004,12,25],"Tauro"],
+    [[2001,10,13],[2003,4,13],"Géminis"],[[2000,4,9],[2001,10,12],"Cáncer"],
+    [[1998,10,20],[2000,4,8],"Leo"],[[1997,1,25],[1998,10,19],"Virgo"],
+    [[1995,7,31],[1997,1,24],"Libra"],[[1994,1,25],[1995,7,30],"Escorpio"],
+    [[1992,8,1],[1994,1,24],"Sagitario"],[[1991,2,18],[1992,7,31],"Capricornio"],
+    [[1989,5,23],[1991,2,17],"Acuario"],[[1987,12,2],[1989,5,22],"Piscis"],
+    [[1986,4,6],[1987,12,1],"Aries"],[[1984,9,11],[1986,4,5],"Tauro"],
+    [[1983,3,16],[1984,9,10],"Géminis"],[[1981,9,24],[1983,3,15],"Cáncer"],
+    [[1980,3,27],[1981,9,23],"Leo"],[[1978,10,5],[1980,3,26],"Virgo"],
+    [[1977,4,8],[1978,10,4],"Libra"],[[1975,10,10],[1977,4,7],"Escorpio"],
+    [[1974,4,20],[1975,10,9],"Sagitario"],[[1972,10,27],[1974,4,19],"Capricornio"],
+    [[1971,4,28],[1972,10,26],"Acuario"],[[1969,11,19],[1971,4,27],"Piscis"],
+    [[1968,4,19],[1969,11,18],"Aries"],[[1966,10,4],[1968,4,18],"Tauro"],
+    [[1965,3,10],[1966,10,3],"Géminis"],[[1963,9,25],[1965,3,9],"Cáncer"],
+    [[1962,3,28],[1963,9,24],"Leo"],[[1960,6,10],[1962,3,27],"Virgo"],
+    [[1958,12,16],[1960,6,9],"Libra"],[[1957,6,16],[1958,12,15],"Escorpio"],
+    [[1955,10,4],[1957,6,15],"Sagitario"],[[1954,4,24],[1955,10,3],"Capricornio"],
+    [[1952,10,9],[1954,4,23],"Acuario"],[[1951,3,28],[1952,10,8],"Piscis"],
+    [[1949,7,26],[1951,3,27],"Aries"],[[1948,1,26],[1949,7,25],"Tauro"],
+    [[1946,8,2],[1948,1,25],"Géminis"],[[1945,2,11],[1946,8,1],"Cáncer"],
+    [[1943,8,2],[1945,2,10],"Leo"],[[1942,1,26],[1943,8,1],"Virgo"],
+    [[1940,7,8],[1942,1,25],"Libra"]
+  ];
+  var dt=new Date(y,m-1,d);
+  for(var i=0;i<T.length;i++){
+    var f=new Date(T[i][0][0],T[i][0][1]-1,T[i][0][2]);
+    var t=new Date(T[i][1][0],T[i][1][1]-1,T[i][1][2]);
+    if(dt>=f&&dt<=t)return T[i][2];
+  }
+  return null;
+}
+
+function getH(pS,aS){
+  var ai=SIGNS.indexOf(aS),pi=SIGNS.indexOf(pS);
+  if(ai<0||pi<0)return null;
+  var h=pi-ai+1;if(h<=0)h+=12;return h;
+}
+function rom(n){return["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"][n-1]||n;}
+
+var HT={
+ns:{
+1:"Este tránsito activa tu Casa 1, que rige la identidad, el cuerpo y la manera en que te proyectas al mundo. La conjunción Saturno-Neptuno aquí te invita a dar forma concreta a una nueva versión de ti misma: más auténtica, menos condicionada por identidades heredadas o expectativas externas. Puede haber una sensación de disolución del yo antiguo antes de que emerja el nuevo — una neblina necesaria, no un extravío. El desafío específico de este ciclo en tu vida es usar esa disolución como materia prima para una reconfiguración consciente, no perderte en ella. Lo que Saturno pide aquí es que elijas activamente quién quieres ser, y que esa elección se encarne en el cuerpo, en la presencia, en la manera cotidiana de existir en el mundo.",
+2:"Este tránsito activa tu Casa 2, que rige los recursos materiales, los valores propios y la relación con el cuerpo como instrumento. Saturno-Neptuno aquí pone a prueba los cimientos económicos e invita a disolver lo que acumulabas por miedo para construir desde una base más genuina y alineada. Es un ciclo ideal para materializar una vocación que antes parecía demasiado etérea o poco práctica — darle forma económica real a algo que siempre fue una visión. Lo que aprecias, lo que produces, lo que consideras tuyo está siendo sometido a una revisión profunda. La promesa de este ciclo es una relación radicalmente más libre con la abundancia, donde el sustento fluye desde el propósito y no desde el miedo a carecer.",
+3:"Este tránsito activa tu Casa 3, que rige la comunicación, el pensamiento cotidiano, el aprendizaje y el entorno cercano. Saturno-Neptuno aquí disuelve viejas formas de pensar y hablar para construir un lenguaje propio más preciso, más verdadero y más tuyo. Puede haber un período de confusión comunicativa — palabras que ya no alcanzan, marcos que ya no sirven — antes de que emerja una nueva claridad expresiva. Es un ciclo excelente para formalizar estudios o proyectos de divulgación que llevan tiempo gestándose en la mente. El entorno cercano — hermanos, vecinos, comunidad inmediata — puede ser tanto el espejo como el campo de práctica concreta de esta transformación.",
+4:"Este tránsito activa tu Casa 4, el ámbito más íntimo de la carta: el hogar, las raíces familiares, el pasado emocional y el sentido de pertenencia. Saturno-Neptuno aquí puede marcar el fin de un ciclo familiar importante, una mudanza significativa, o una reconciliación profunda con el origen y con lo que se heredó. Lo que se disuelve en este proceso son las lealtades inconscientes a patrones que ya no representan quién eres. Lo que se construye es un nuevo sentido del hogar interior, genuinamente tuyo, independiente de circunstancias externas — un suelo desde el cual habitar el mundo sin necesitar que el mundo confirme constantemente quién eres.",
+5:"Este tránsito activa tu Casa 5, que rige la creatividad, la expresión personal, el placer, el amor romántico y la relación con lo que creas. Saturno-Neptuno aquí puede convertir en algo real y estructurado una vocación creativa que siempre fue un sueño postergado. También puede traer una relación amorosa que combine lo práctico con lo trascendente, o una transformación profunda en la capacidad de disfrutar y de expresarse sin pedir permiso. El desafío de este ciclo es no endurecer la creatividad con demasiado control ni perderla en la ensoñación sin forma. Lo que emerge cuando se logra ese equilibrio es una expresión genuina que tiene tanto profundidad como presencia.",
+6:"Este tránsito activa tu Casa 6, que rige los hábitos cotidianos, la salud, el trabajo y la manera en que te pones al servicio del mundo. Saturno-Neptuno aquí te invita a disolver rutinas que funcionaban por inercia y a construir nuevas prácticas más alineadas con quién estás siendo ahora. Es un ciclo clave para transformar la relación con el cuerpo desde una perspectiva integral, menos mecanicista y más consciente. En lo laboral puede marcar el paso de un trabajo realizado por obligación a un servicio genuinamente vocacional. La pregunta central que este ciclo planta en tu vida es una que vale la pena sostener: ¿desde dónde sirves — desde el miedo o desde el sentido?",
+7:"Este tránsito activa tu Casa 7, que rige los vínculos significativos: la pareja, las alianzas importantes, los contratos y también los adversarios. Saturno-Neptuno aquí puede disolver una relación que ya cumplió su ciclo, o transformar profundamente una relación existente llevándola a un nivel de autenticidad que antes no había alcanzado. También puede indicar el nacimiento de una alianza — afectiva o profesional — que combina estructura y visión de una manera que antes parecía imposible. El desafío central es ver a los otros con claridad, sin idealizarlos ni demonizarlos, y construir vínculos desde la presencia real y no desde la proyección.",
+8:"Este tránsito activa tu Casa 8, el territorio de la transformación profunda, los recursos compartidos, la sexualidad y lo que se hereda o se debe — en todos los sentidos. Es uno de los tránsitos más intensos en esta posición: puede implicar duelos, herencias, crisis financieras compartidas o un despertar espiritual activado por el encuentro directo con la sombra propia y ajena. La promesa de este ciclo es una regeneración genuina que ocurre justamente donde el paradigma anterior tenía mayor control sobre ti. Lo que Saturno-Neptuno destruye aquí es la ilusión de que se puede controlar lo que es esencialmente misterioso; lo que construye es una relación más honesta con el poder y con la impermanencia.",
+9:"Este tránsito activa tu Casa 9, que rige las creencias filosóficas, la educación superior, los viajes largos y la visión del mundo en su conjunto. Saturno-Neptuno aquí te invita a formalizar una filosofía de vida — o un proyecto educativo o editorial — que hasta ahora ha sido intuición o aspiración dispersa. Puede haber una crisis de creencias donde el sistema de sentido anterior se desmorona antes de que emerja una comprensión más madura, menos dogmática y más encarnada en la experiencia real. Es un ciclo especialmente poderoso para publicar, enseñar o construir proyectos que combinen el rigor intelectual con la profundidad espiritual.",
+10:"Este tránsito activa tu Casa 10, que rige la vocación, el rol público y el lugar que ocupas en el mundo. Puede redefinir completamente esa posición: disolver una identidad profesional que ya no te representa y construir, con la paciencia y el rigor que Saturno exige, una nueva autoridad pública alineada con tu propósito más profundo. Es un ciclo que recompensa a quienes trabajan desde la integridad y pone a prueba todo lo que fue construido sobre bases que no eran del todo sólidas. La transformación que propone es de largo plazo: el mundo comenzará a verte de otra manera en la misma medida en que tú elijas verte de otra manera.",
+11:"Este tránsito activa tu Casa 11, que rige los proyectos colectivos, las redes, las amistades profundas y los sueños a largo plazo. Saturno-Neptuno aquí puede disolver grupos o comunidades que ya cumplieron su función y abrir la puerta a nuevas alianzas más coherentes con quien estás siendo. Es un ciclo ideal para formalizar proyectos que tienen impacto colectivo real, para dar estructura concreta a visiones que hasta ahora eran demasiado difusas. La visión que antes parecía demasiado grande o demasiado idealista comienza a tener cronograma, equipo y forma. El desafío es no perderse en el idealismo colectivo ni endurecerse en el pragmatismo.",
+12:"Este tránsito activa tu Casa 12, que es el espacio de lo invisible: el inconsciente, el retiro, la espiritualidad y todo lo que opera de manera subterránea en la vida. Saturno-Neptuno aquí puede indicar un período de recogimiento profundo, de trabajo interior intenso, o de confrontación con miedos y sombras que estaban actuando sin ser vistos. Es uno de los tránsitos más místicos y transformadores posibles en cualquier carta natal. Lo que emerge de este ciclo no es una comprensión abstracta de lo espiritual: es una comprensión encarnada, probada en el silencio y disponible como recurso genuino en la vida cotidiana."
+},
+pl:{
+1:"Plutón activa tu Casa 1 — identidad y presencia — durante las próximas dos décadas. Tu manera de proyectarte al mundo está siendo radicalmente redefinida en un proceso que no admite medias tintas. Este tránsito otorga una presencia magnética e intensa, pero también trae confrontaciones con el poder — propio y ajeno — que obligan a un proceso de autenticidad sin concesiones. La persona que eras hace cinco años ya no existe de la misma manera; la que serás en diez años tiene muy poco que ver con quien eres hoy en términos de identidad externa. La transformación no es opcional aquí: ocurre quieras o no. La pregunta que este tránsito planta es si la acompañas conscientemente o la atraviesas sin entender lo que está ocurriendo.",
+2:"Plutón activa tu Casa 2 — recursos, valores y sentido de seguridad. Puede haber períodos de pérdida o crisis financiera que en realidad son oportunidades para liberarse de una relación con el dinero construida sobre el miedo o sobre valores que no eran genuinamente tuyos. Plutón en la Casa 2 no destruye la abundancia: destruye la abundancia que estaba basada en premisas equivocadas. Lo que construye en su lugar es una relación con los recursos que no depende de circunstancias externas para sentirse completa — una seguridad que viene de adentro y se expresa hacia afuera, no al revés.",
+3:"Plutón activa tu Casa 3 — mente, comunicación y entorno cercano. Hay una necesidad de ir al fondo de las ideas, de no quedarse con la superficie de la información ni con los consensos establecidos. Este tránsito puede transformar la manera de pensar y de comunicarse de manera permanente, abriendo acceso a dimensiones del conocimiento que antes eran completamente invisibles. En lo concreto puede iniciar un proyecto comunicativo — escritura, divulgación, enseñanza — con la capacidad de tener un impacto transformador real en quienes lo reciben. Los vínculos cercanos que no pueden sostener esta profundidad también pueden transformarse durante este período.",
+4:"Plutón activa tu Casa 4 — raíces, hogar y cimientos emocionales. Este tránsito trabaja en los patrones más profundos del psiquismo: los transgeneracionales, los heredados sin elección, los que operan desde la infancia con una fuerza que parece incuestionable. Puede traer procesos intensos de sanación familiar, duelos necesarios, o la liberación de lealtades inconscientes que limitaban el crecimiento de maneras que no siempre eran visibles. Lo que emerge de este trabajo profundo es un sentido de hogar interior genuinamente tuyo — construido desde tus propios cimientos y no desde los que alguien más diseñó para ti.",
+5:"Plutón activa tu Casa 5 — creatividad, amor y expresión personal. Las relaciones amorosas que llegan bajo este tránsito son intensas, transformadoras y raramente superficiales: tienen el potencial de cambiar la dirección de la vida. La creatividad desarrolla una profundidad y una urgencia nuevas que no existían antes. Lo que se disuelve es la capacidad de entretenerse de manera liviana: lo que antes era juego se convierte en expresión del alma. Lo que emerge — cuando se trabaja conscientemente — es una creatividad que toca algo real y profundo en quienes la reciben, con una presencia que no puede ignorarse.",
+6:"Plutón activa tu Casa 6 — hábitos, salud y trabajo. El trabajo que no tiene sentido se vuelve insoportable durante este ciclo — no como queja sino como señal. Lo que emerge en su lugar es una vocación de servicio con poder real: la capacidad genuina de transformar a quienes acompañas en tu trabajo cotidiano. En lo que respecta a la salud, puede haber llamados a una transformación profunda en la relación con el cuerpo — crisis que son en realidad invitaciones a una manera completamente distinta de habitarlo. Es un período ideal para revisar y reconstruir los hábitos cotidianos desde un principio de alineación y no de obligación.",
+7:"Plutón activa tu Casa 7 — vínculos significativos y alianzas. Las relaciones de pareja o las alianzas profesionales pueden atravesar crisis que las destruyen o las regeneran en un nivel completamente distinto y más auténtico. Lo que este tránsito no tolera es la relación de fachada — lo que no es genuino se disuelve. Lo que sobrevive a este período es un vínculo que tiene raíces reales en la presencia mutua. También puede indicar el encuentro con personas que actúan como espejos de transformación — personas que cambian la dirección de la vida de manera que no hubiera sido posible de otra manera.",
+8:"Plutón activa tu Casa 8, que es su posición de mayor poder natural ya que Plutón rige a Escorpio y la Casa 8 es su territorio. Aquí la transformación es total y opera en múltiples dimensiones simultáneamente: recursos compartidos, sexualidad, herencias, lo oculto, la muerte simbólica y el renacimiento. Este ciclo puede traer contacto directo con el poder — económico, espiritual, sexual — y la necesidad profunda de aprender a manejarlo con integridad y sin distorsiones. Los procesos de duelo, las herencias o las crisis de deuda pueden ser el vehículo de una transformación que va mucho más allá de lo que parece en la superficie.",
+9:"Plutón activa tu Casa 9 — creencias filosóficas y visión del mundo. Las certezas que sostenían tu cosmovisión se disuelven para dar paso a una comprensión más compleja, más encarnada y menos dependiente de dogmas heredados. Este tránsito puede provocar una ruptura con tradiciones religiosas o filosóficas que ya no representan quien estás siendo, y el desarrollo de una espiritualidad o una filosofía genuinamente propia — no tomada de ningún sistema preexistente. Los encuentros con maestros de alto nivel o los estudios profundos en áreas de frontera suelen ser los catalizadores de esta transformación.",
+10:"Plutón activa tu Casa 10 — vocación y lugar público. Puede implicar el ascenso a posiciones de poder genuino, o la caída de una identidad profesional que no era auténtica. Lo que Plutón destruye aquí no es la vocación: destruye la ambición construida sobre el miedo al juicio o sobre la necesidad de validación externa. Lo que construye en su lugar es una autoridad real que emerge del propósito, y que tiene un peso y una presencia que la anterior nunca tuvo. El impacto en el mundo puede volverse verdaderamente significativo durante este ciclo, pero requiere aceptar la responsabilidad completa que viene con ese poder.",
+11:"Plutón activa tu Casa 11 — proyectos colectivos, redes y sueños a largo plazo. Puede haber traiciones o rupturas en grupos que en realidad son liberaciones de lealtades que ya no servían al crecimiento. También puede indicar el desarrollo de un poder de convocatoria e influencia colectiva genuino — la capacidad de mover a grupos de personas hacia transformaciones que importan. Los proyectos que nacen o se consolidan bajo este tránsito tienen la potencia de transformar a las comunidades que los reciben de maneras que perduran.",
+12:"Plutón activa tu Casa 12, que es el espacio más profundo del inconsciente. Este tránsito puede traer a la superficie material psíquico que estaba completamente enterrado: miedos arcaicos, memorias reprimidas, patrones kármicos que operaban sin ser vistos. Es un ciclo de trabajo interior que puede sentirse profundamente solitario, pero que produce una transformación espiritual de largo alcance que no podría haber ocurrido de ninguna otra manera. Lo que emerge de aquí no es una persona mejorada en la versión anterior: es una persona radicalmente distinta en su relación con la dimensión invisible de la existencia."
+},
+ur:{
+1:"Urano activa tu Casa 1 — identidad y presencia — durante los próximos 8 años. Puedes experimentar cambios bruscos e inesperados en tu apariencia, en tu manera de presentarte al mundo o en la dirección de vida que parecía establecida. Hay una necesidad urgente y creciente de ser auténtica que puede resultar disruptiva para el entorno cercano, que te conocía de otra manera. Este ciclo libera de roles que se llevaban por inercia, por expectativa social o por lealtades que ya cumplieron su tiempo. La persona que empieces este ciclo y la que lo termines pueden tener muy poco en común en términos de identidad externa — y eso es exactamente lo que este tránsito propone.",
+2:"Urano activa tu Casa 2 — recursos e ingresos. Puede haber períodos de inestabilidad económica seguidos de saltos abruptos hacia nuevas fuentes de abundancia que antes no existían o no parecían posibles. Lo que se disuelve es la seguridad basada en la acumulación y en las fuentes de ingreso conocidas; lo que emerge es una relación más libre, más original e innovadora con los recursos. Es un ciclo excelente para emprender proyectos económicos no convencionales, para desarrollar talentos únicos como fuente genuina de sustento o para liberarse de estructuras financieras que limitaban la libertad.",
+3:"Urano activa tu Casa 3 — pensamiento, comunicación y aprendizaje. La mente se vuelve más rápida, más original y menos tolerante con los marcos establecidos de pensamiento o con las ideas que no resisten el escrutinio. Es un ciclo ideal para proyectos de comunicación disruptiva, escritura experimental o divulgación de ideas que van a contracorriente del consenso. La inteligencia artificial como herramienta del pensamiento es uno de los temas centrales de Urano en Géminis activando esta casa — es tu área de mayor revolución cognitiva en los próximos años.",
+4:"Urano activa tu Casa 4 — hogar y raíces. Puede traer cambios abruptos en la situación residencial, en la configuración familiar o en la relación con el origen. Lo que estaba fijo en el ámbito doméstico comienza a moverse de maneras que no se pueden anticipar completamente. En un nivel más profundo, este tránsito libera de la prisión psicológica del origen, permitiendo construir un sentido de pertenencia basado en el presente y en quién se elige ser — no en quién se fue o en lo que el pasado determinó.",
+5:"Urano activa tu Casa 5 — creatividad, expresión y amor. La expresión artística o creativa puede dar un salto repentino hacia terrenos completamente nuevos que antes no habías considerado. Las relaciones amorosas de este ciclo son eléctricas, estimulantes e impredecibles — tienen una cualidad transformadora aunque no siempre sean duraderas en los términos convencionales. Es un ciclo en que la autenticidad expresiva se convierte en la prioridad por encima de la aprobación o la comodidad del entorno.",
+6:"Urano activa tu Casa 6 — hábitos, salud y trabajo cotidiano. Las rutinas que funcionaban se vuelven insostenibles y es necesario reinventarlas desde cero con una lógica completamente distinta. Puede haber cambios abruptos en el trabajo — despidos, renuncias, cambios de carrera inesperados — que en realidad son liberaciones necesarias de estructuras que ya no servían. En lo que respecta a la salud, este ciclo favorece enfoques integrales y no convencionales que pueden producir resultados sorprendentes.",
+7:"Urano activa tu Casa 7 — vínculos significativos y alianzas. Las relaciones que no tienen espacio real para la libertad individual se fracturan o se transforman de manera abrupta. Las nuevas relaciones que comienzan bajo este tránsito son estimulantes, poco convencionales e independientes — difíciles de sostener en formatos tradicionales pero muy fértiles en términos de crecimiento. En lo profesional pueden surgir alianzas inesperadas con personas que abren territorios completamente nuevos.",
+8:"Urano activa tu Casa 8 — transformación y lo que permanece oculto. Puede haber revelaciones inesperadas, cambios abruptos en los recursos compartidos o situaciones que traen a la superficie lo que estaba completamente enterrado. En lo espiritual este tránsito puede abrir acceso repentino a capacidades perceptivas que antes estaban dormidas o bloqueadas. Es un ciclo que no tolera lo que permanece oculto por comodidad: trae a la superficie lo que necesitaba ser visto, en el momento en que puede ser procesado.",
+9:"Urano activa tu Casa 9 — creencias, filosofía y visión del mundo. Las certezas filosóficas o espirituales que parecían inamovibles pueden desmoronarse de manera abrupta para dar paso a una comprensión radicalmente más libre y menos dependiente de sistemas heredados. Es un ciclo ideal para explorar tradiciones no convencionales, para publicar ideas que van decididamente a contracorriente del consenso, o para iniciar estudios en áreas que el sistema académico convencional todavía no reconoce.",
+10:"Urano activa tu Casa 10 — vocación y rol público. Lo que parecía una carrera estable puede transformarse de manera inesperada, abriendo la puerta a algo completamente diferente y más alineado. La imagen pública se vuelve más original, más disruptiva y menos preocupada por mantener el consenso o la aprobación. Este ciclo puede catapultar hacia una visibilidad inesperada si se está alineada con el propio propósito. El desafío es no aferrarse a la seguridad de lo conocido precisamente cuando el cambio llama con más fuerza.",
+11:"Urano activa tu Casa 11 — colectivos, redes y proyectos grupales. Los grupos de pertenencia que antes eran el núcleo de la identidad social pueden disolverse o transformarse de manera radical. Nuevas redes y comunidades más coherentes con quien estás siendo comienzan a formarse, con frecuencia de maneras que no se pueden planificar. Es un ciclo muy propicio para el activismo, los proyectos de impacto colectivo o la construcción de comunidades alternativas que abren territorios donde todavía no hay camino trazado.",
+12:"Urano activa tu Casa 12 — el inconsciente y los patrones que operan de manera invisible. Pueden surgir revelaciones inesperadas sobre el propio psiquismo o sobre dinámicas que estaban completamente fuera del campo de visión consciente. Las creencias espirituales pueden transformarse de manera abrupta hacia algo más libre, menos condicionado por el miedo y más encarnado en la experiencia real. Lo que emerge de este tránsito es una relación con la dimensión invisible de la existencia que ya no está gobernada por el miedo sino por una curiosidad genuina."
+},
+nodo:{
+"Aries":"El Nodo Norte en Aries señala una misión de vida orientada al desarrollo de la autonomía, el coraje y la iniciativa personal. Viniste a aprender a actuar desde tus propios impulsos, a tomar riesgos sin esperar el consenso del grupo, a ser pionera en algún ámbito de tu existencia sin pedir permiso. El patrón que viene del pasado kármico — el nodo sur en Libra — es la tendencia a ceder, a definirte en relación con otros, a evitar el conflicto a cualquier costo y a relegar los propios deseos en nombre de la armonía. El gran aprendizaje de esta encarnación es descubrir que puedes desear sin pedir permiso, liderar sin necesitar ser seguida, y existir con plena independencia sin que eso signifique abandonar el amor o la conexión.",
+"Tauro":"El Nodo Norte en Tauro invita al desarrollo de la seguridad interior, la conexión con el cuerpo y la capacidad de construir desde la paciencia y la presencia. La misión es aprender a disfrutar sin necesitar transformar todo, a permanecer sin urgencia de ir siempre más profundo, a cultivar la abundancia como una práctica de paz y no como resultado de la lucha. El patrón kármico — nodo sur en Escorpio — incluye la tendencia a la intensidad, el control, la transformación constante y la dificultad para simplemente estar. El cuerpo, los sentidos y la belleza son los maestros principales de este nodo.",
+"Géminis":"El Nodo Norte en Géminis señala una misión centrada en la curiosidad, la comunicación y la apertura mental genuina. La invitación es soltar las grandes verdades para hacer preguntas más pequeñas y más honestas, aprender sin necesitar que el aprendizaje confirme creencias previas, y comunicar desde la humildad y el asombro en lugar de desde la certeza. El patrón kármico — nodo sur en Sagitario — incluye el dogmatismo, la certeza de tener La Verdad y la dificultad para tolerar la ambigüedad. La mente abierta, ágil y dispuesta a cambiar de posición es el instrumento central de tu evolución.",
+"Cáncer":"El Nodo Norte en Cáncer invita al desarrollo del mundo emocional, la vulnerabilidad y el sentido de pertenencia íntima y real. La misión es aprender a necesitar sin avergonzarse de eso, a recibir cuidado sin que parezca una debilidad, a construir un hogar — interno y externo — que sea refugio verdadero. El patrón kármico — nodo sur en Capricornio — incluye el exceso de estructura, la frialdad emocional como estrategia de protección y la priorización del logro externo sobre la vida interior. La ternura, la memoria afectiva y el arraigo son los territorios centrales de tu crecimiento.",
+"Leo":"El Nodo Norte en Leo señala una misión centrada en la creatividad, la expresión personal y el desarrollo de la propia voz sin necesidad de que sea validada por el grupo. La invitación es atreverse a brillar desde el centro propio, a crear desde el gozo y no desde la utilidad social, a desarrollar un estilo genuinamente tuyo que no requiere la aprobación del colectivo para existir y para tener valor. El patrón kármico — nodo sur en Acuario — incluye la tendencia a disolverse en el grupo y a definir la identidad por el colectivo en lugar de por el propio centro.",
+"Virgo":"El Nodo Norte en Virgo invita al desarrollo del discernimiento, el servicio concreto y la maestría en algún oficio o área de conocimiento específica. La misión es aprender a ser útil de manera precisa y medible, a cuidar los detalles como práctica espiritual, a integrar lo trascendente en lo cotidiano a través de hábitos consistentes y trabajo bien hecho. El patrón kármico — nodo sur en Piscis — incluye la tendencia a la evasión, la confusión de límites, el sacrificio desorganizado y la dificultad para aterrizar las visiones en acciones concretas.",
+"Libra":"El Nodo Norte en Libra señala una misión orientada al desarrollo de la capacidad de vincularse genuinamente, negociar desde la equidad y construir desde la cooperación real. La invitación es aprender a considerar al otro antes de actuar, a buscar el equilibrio en los vínculos, a desarrollar la diplomacia y la justicia como valores que organizan la vida. El patrón kármico — nodo sur en Aries — incluye el individualismo, la impulsividad y la dificultad para tener en cuenta al otro cuando los propios impulsos son fuertes. Las relaciones significativas son el espejo y el campo de práctica de tu evolución.",
+"Escorpio":"El Nodo Norte en Escorpio señala una misión centrada en la profundidad, la transformación y la intimidad real como práctica de vida. La invitación es soltar lo acumulado — recursos, seguridades, certezas — para ir a lo profundo, desarrollar la capacidad de transformarse sin perder el centro, y acompañar a otros en sus procesos de transformación desde un lugar de genuina fortaleza. El patrón kármico — nodo sur en Tauro — incluye el apego a la seguridad material y la resistencia al cambio como reflejo de miedo a la pérdida.",
+"Sagitario":"El Nodo Norte en Sagitario invita al desarrollo de una visión filosófica propia, la búsqueda de sentido y la expansión genuina más allá de lo conocido y lo verificable. La misión es integrar el conocimiento disperso en una visión coherente y propia, desarrollar una fe — en algo más grande que la mente analítica — que organice la vida desde adentro. El patrón kármico — nodo sur en Géminis — incluye la dispersión intelectual, el saltar de idea en idea sin profundizar, y la ansiedad comunicativa que llena el silencio para no encontrarse con lo esencial.",
+"Capricornio":"El Nodo Norte en Capricornio señala una misión centrada en el desarrollo de la disciplina real, la responsabilidad y la construcción de algo duradero en el mundo que trascienda la propia persona. La invitación es construir una autoridad basada en el mérito y el esfuerzo sostenido, desarrollar la madurez como una fortaleza y no como una carga, y dejar una huella concreta en el mundo que no dependa de la aprobación emocional del entorno. El patrón kármico — nodo sur en Cáncer — incluye el apego al pasado y la dependencia emocional.",
+"Acuario":"El Nodo Norte en Acuario señala una misión orientada al servicio colectivo, la innovación y la conciencia de pertenencia a algo más grande que el yo individual y sus necesidades. La invitación es desarrollar una visión de futuro que trascienda el beneficio personal, trabajar en red de manera genuina, y poner los propios talentos al servicio de proyectos colectivos que importen. El patrón kármico — nodo sur en Leo — incluye el exceso de ego, la necesidad de ser el centro de la escena y la dificultad para ceder el protagonismo cuando el bien colectivo lo requiere.",
+"Piscis":"El Nodo Norte en Piscis invita al desarrollo de la apertura espiritual, la compasión universal y la confianza en los procesos que van más allá del control racional y de la verificación inmediata. La misión es aprender a rendirse al misterio sin perder el centro, a confiar en lo invisible sin convertirlo en evasión, a desarrollar una espiritualidad encarnada que no huya de la imperfección sino que la abrace como parte necesaria del camino. El patrón kármico — nodo sur en Virgo — incluye el hiperperfeccionismo, el exceso de análisis como defensa y la dificultad para soltar el control."
+}
+};
+
+window.muCalcular=function(){
+  var day=parseInt(document.getElementById('muDay').value);
+  var month=parseInt(document.getElementById('muMonth').value);
+  var year=parseInt(document.getElementById('muYear').value);
+  var asc=document.getElementById('muAsc').value;
+  var nodoSigUser=document.getElementById('muNodo').value;
+  var nodoCasaUser=document.getElementById('muNodoCasa').value;
+  if(!day||!month||!year||day<1||day>31||year<1940||year>2010){
+    document.getElementById('muErr').style.display='block';return;
+  }
+  document.getElementById('muErr').style.display='none';
+  var nodoSig=nodoSigUser||calcNodo(year,month,day)||"No determinado";
+  var hNS=asc?getH("Aries",asc):null;
+  var hPl=asc?getH("Acuario",asc):null;
+  var hUr=asc?getH("Géminis",asc):null;
+  var hNo=nodoCasaUser?parseInt(nodoCasaUser):(asc&&nodoSig!=="No determinado"?getH(nodoSig,asc):null);
+  document.getElementById('muResName').textContent="Mapa del umbral · "+day+"/"+month+"/"+year;
+  document.getElementById('muResDate').textContent=asc?"Ascendente: "+asc:"Sin ascendente — casas aproximadas";
+  var grid=document.getElementById('muGrid');
+  grid.innerHTML='';
+  var cards=[
+    {cls:'',sym:'♆♄',name:'SATURNO-NEPTUNO EN ARIES',pos:'0° Aries — ciclo 2025-2026',casa:hNS,hKey:'ns',
+     desc:'La conjunción Saturno-Neptuno en el grado 0 de Aries inaugura un ciclo de 36 años. Es el momento en que una visión espiritual o filosófica gestada durante décadas debe tomar forma concreta. Saturno aporta estructura y responsabilidad; Neptuno aporta visión y disolución de lo que ya no sirve. Juntos en Aries proponen: materializar lo sagrado, dar cuerpo a lo etéreo, comenzar algo nuevo desde la autenticidad más radical.',
+     fallback:'Ingresa tu ascendente para ver en qué área de tu vida opera este ciclo inaugural.'},
+    {cls:'',sym:'♇',name:'PLUTÓN EN ACUARIO',pos:'Acuario — ciclo 2024-2044',casa:hPl,hKey:'pl',
+     desc:'Plutón transita Acuario durante 20 años transformando las estructuras de poder colectivo, la tecnología y la inteligencia distribuida. Es la muerte del poder piramidal y el nacimiento de formas organizativas que no dependen de la jerarquía. A nivel personal, Plutón en Acuario pregunta: ¿qué parte de tu identidad todavía depende de estructuras de poder que están colapsando?',
+     fallback:'Ingresa tu ascendente para ver en qué área de tu vida opera esta transformación de 20 años.'},
+    {cls:'',sym:'♅',name:'URANO EN GÉMINIS',pos:'Géminis — ciclo 2025-2033',casa:hUr,hKey:'ur',
+     desc:'Urano en Géminis inaugura 8 años de revolución cognitiva. El pensamiento, el lenguaje y la forma en que procesamos información serán transformados de raíz. La IA como extensión de la mente, las nuevas formas de aprendizaje y la mutación del lenguaje son sus temas centrales. ¿Estás dispuesta a pensar de maneras que todavía no tienes nombre para nombrar?',
+     fallback:'Ingresa tu ascendente para ver qué área de tu vida será el campo de esta revolución cognitiva.'},
+    {cls:'nodo',sym:'☊',name:'NODO NORTE — MISIÓN DE VIDA',
+     pos:nodoSig!=="No determinado"?"Nodo Norte en "+nodoSig:"Introduce tu fecha para calcularlo",
+     casa:hNo,hKey:'nodo',nodoSig:nodoSig,
+     desc:nodoSig!=="No determinado"&&HT.nodo[nodoSig]?HT.nodo[nodoSig]:"El Nodo Norte describe la dirección evolutiva de tu alma. Se calcula automáticamente desde la fecha de nacimiento.",
+     fallback:'Ingresa tu ascendente o la casa de tu Nodo Norte para ubicar en qué área opera tu misión de vida.'}
+  ];
+  cards.forEach(function(card){
+    var casa=card.casa;
+    var desafio='';
+    if(casa){
+      if(card.hKey==='nodo'){
+        desafio='<strong>En tu Casa '+rom(casa)+' — '+AREAS[casa]+':</strong> Es aquí, en esta área concreta de tu vida, donde el programa te invita a encarnar el nuevo paradigma — no solo comprenderlo conceptualmente, sino vivirlo y expresarlo.';
+      } else {
+        desafio=HT[card.hKey][casa]||'';
+      }
+    } else {
+      desafio=card.fallback||'';
+    }
+    var div=document.createElement('div');
+    div.className='mu-card '+card.cls;
+    div.innerHTML='<div class="mu-top"><span class="mu-name">'+card.sym+'&nbsp;&nbsp;'+card.name+'</span>'+(casa?'<span class="mu-casa-badge">Casa '+rom(casa)+'</span>':'')+'</div><div class="mu-pos">'+card.pos+'</div><div class="mu-desc">'+card.desc+'</div>'+(desafio?'<div class="mu-desafio">'+desafio+'</div>':'');
+    grid.appendChild(div);
+  });
+  document.getElementById('muResult').classList.add('show');
+  document.getElementById('muResult').scrollIntoView({behavior:'smooth',block:'start'});
+};
+})();
+</script>
