@@ -46,6 +46,10 @@
 #mapaUmbral .mu-desafio strong{color:#7ECFCF}
 #mapaUmbral .mu-nota{padding:16px 32px;background:#0A1520;border-top:1px solid rgba(58,159,168,.15)}
 #mapaUmbral .mu-nota p{font-family:'Space Mono',monospace;font-size:7.5px;letter-spacing:1.5px;color:#446666;line-height:1.8}
+#mapaUmbral .mu-back{display:none;padding:16px 32px 0}
+#mapaUmbral .mu-back.on{display:block}
+#mapaUmbral .mu-back button{background:transparent;border:1px solid rgba(126,207,207,.45);color:#7ECFCF;padding:10px 18px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;cursor:pointer}
+#mapaUmbral .mu-back.bottom{padding:0 32px 26px;text-align:center}
 #mapaUmbral .mu-full{display:none;padding:18px 32px 22px;text-align:center}
 #mapaUmbral .mu-full.on{display:block}
 #mapaUmbral .mu-full button{background:transparent;border:1px solid rgba(126,207,207,.55);color:#7ECFCF;padding:12px 22px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:background .2s}
@@ -190,12 +194,14 @@
   </div>
 
   <div class="mu-result" id="muResult">
+    <div class="mu-back" id="muBackTop"><button type="button" onclick="muVolver()">← Volver a la página</button></div>
     <div class="mu-res-header">
       <h3 id="muResName">Tu mapa del umbral</h3>
       <span id="muResDate"></span>
     </div>
     <div class="mu-grid" id="muGrid"></div>
     <div class="mu-nota" id="muNota"></div>
+    <div class="mu-back bottom" id="muBackBottom"><button type="button" onclick="muVolver()">← Volver a la página</button></div>
     <div class="mu-full" id="muFull"><button type="button" onclick="muAbrirCompleto()">Ver mi resultado completo ↗</button></div>
     <div class="mu-cta">
       <p>Esto es un primer trazo. El Laboratorio de Reinicio Ontológico despliega el mapa completo: baja estos tránsitos de época a cada área de tu vida, con las ventanas de fechas exactas sobre tu horizonte personal, y enlaza tu proceso con la transformación colectiva de la época para trazar el rol existencial que busca emerger.</p>
@@ -757,6 +763,11 @@ window.__muHoraSetup=function(){
 
 /* ---- init ---- */
 window.__muCitySetup&&window.__muCitySetup();window.__muHoraSetup&&window.__muHoraSetup();
+
+window.muVolver=function(){
+  try{window.close();}catch(e){}
+  setTimeout(function(){if(!window.closed)location.href='https://www.tribuurana.com/';},250);
+};
 /* ---- ver resultado completo en pestaña nueva ---- */
 window.muAbrirCompleto=function(){
   var g=function(id){var e=document.getElementById(id);return e?e.value:'';};
@@ -779,6 +790,8 @@ window.muAbrirCompleto=function(){
     var hs=document.getElementById('muHoraModo');if(hs)hs.dispatchEvent(new Event('change'));
     window.__muCity=d.c||null;
     window.muCalcular();
+    document.getElementById('muBackTop').classList.add('on');document.getElementById('muBackBottom').classList.add('on');
+    setTimeout(function(){var r=document.getElementById('muResult').getBoundingClientRect();window.scrollTo({top:window.scrollY+r.top-8,behavior:'auto'});},700);
   }catch(e){}
 })();
 
